@@ -1,0 +1,8 @@
+export const shadedTeal = '#357d99'
+export const white = '#fff'
+export const black = '#000'
+export const red = '#b30000'
+export const green = '#393'
+export const lightBlue = '#00a3cc'
+export const mediumGray = '#aaa'
+export const darkGray = '#333'
