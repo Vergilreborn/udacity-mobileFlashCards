@@ -7,6 +7,19 @@ export const ADD_CARD = 'ADD_CARD'
 export const UPDATE_CARD = 'UPDATE_CARD'
 export const DELETE_CARD = 'DELETE_CARD'
 
+export function deleteCard(title,index){
+  return {
+    type: DELETE_CARD,
+    title,
+    index
+  }
+}
+
+export function deleteDeck(title){
+  return {type: DELETE_DECK,
+  title}
+}
+
 export function setDecks(decks){
   return {
     type: SET_DECKS,

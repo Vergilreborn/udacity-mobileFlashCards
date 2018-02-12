@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator,Alert } from 'react-native'
 import { lightBlue, black, mediumGray, darkGray } from '../utils/colors'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { connect } from 'react-redux'
-import { fetchDecks } from '../utils/api'
-import { setDecks } from '../actions'
+import { fetchDecks,removeDeckItem } from '../utils/api'
+import { setDecks,deleteDeck } from '../actions'
 
 class Decks extends Component{
 
@@ -19,13 +19,26 @@ class Decks extends Component{
       .then(({decks}) => this.setState({ready:true}))
   }
 
+  deleteAlert(title){
+    const {dispatch} = this.props;
+    Alert.alert(`Delete ${title}`, 'Are you sure?',
+    [
+      { text: 'Yes', onPress:() =>{
+        removeDeckItem(title)
+            .then(() => dispatch(deleteDeck(title)))
+        }}
+     ,{ text: 'No', onPress:() =>{}}
+
+    ])
+  }
+
   renderDeckItem(item,navigation){
     
     const {title,questions} = item;
   
     return (
       <View style={styles.deckItemContainer} key={title}> 
-        <TouchableOpacity onPress={() => navigation.navigate('DeckSelect',{deckTitle:title})}>
+        <TouchableOpacity onLongPress={() => this.deleteAlert(title)} onPress={() => navigation.navigate('DeckSelect',{deckTitle:title})}>
           <Text style={styles.deckItemTitle}>{title}</Text>
           <Text style={styles.deckItemCardCount}>{questions.length} {questions.length === 1 ? 'card': 'cards'}</Text>
         </TouchableOpacity>
@@ -47,8 +60,8 @@ class Decks extends Component{
       return (
         <View style={styles.emptyDeckContainer}>
           <Text style={styles.emptyDeckMessage}>No decks available.</Text>
-          <TouchableOpacity>
-            <Text style={styles.emptyDeckCreateBtn}  onPress={()=> navigation.navigate('NewDeck')}><MaterialCommunityIcons name='cards-outline' size={18}/>Create Deck</Text>
+          <TouchableOpacity onPress={()=> navigation.navigate('NewDeck')}>
+            <Text style={styles.emptyDeckCreateBtn}><MaterialCommunityIcons name='cards-outline' size={18}/>Create Deck</Text>
           </TouchableOpacity>
         </View>) 
     }

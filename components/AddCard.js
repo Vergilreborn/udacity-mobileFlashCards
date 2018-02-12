@@ -44,11 +44,13 @@ class AddCard extends Component{
     const {navigation} = this.props;
     const {deckTitle} = navigation.state.params;
 
+    let disabled = answer == null || answer.length == 0 || question== null || question.length == 0;
+
     return (
       <View style={[styles.container,{marginTop:20}]}>
         <TextInput value={question} onChangeText={(text) => this.setState({question:text}) } maxLength={160} style={styles.textInputField} placeholderColor={lightBlue} placeholder={'Question'}/>
         <TextInput value={answer} onChangeText={(text) => this.setState({answer:text})} maxLength={160} style={styles.textInputField} placeholderColor={lightBlue} placeholder={'Answer'}/>
-        <Button onPress={()=> this.submitAnswer(deckTitle,question,answer)} style={{marginTop:20}}>Submit</Button>
+        <Button disabled={disabled} onPress={()=> this.submitAnswer(deckTitle,question,answer)} style={{marginTop:20}}>Submit</Button>
       </View>)
   }
 }

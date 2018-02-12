@@ -25,14 +25,14 @@ class DeckSelect extends Component{
     const isEmpty = deck.questions.length === 0
     
     return (
-        //  <ViewTabs/>
+       
        <View style={styles.container}>
         <View style={styles.subContainer}>
           <Text style={styles.deckTitle}>{deck.title}</Text>
           <Text style={styles.deckCount}>{deck.questions.length} {deck.questions.length === 1 ? 'card': 'cards'}</Text>
         </View>
         <View style={styles.subContainer}>
-          <Button style={styles.btnStyle} disabled={isEmpty} textColor={black}>Edit Deck</Button>
+          <Button onPress={()=> navigation.navigate('EditDeck',{deck})} style={styles.btnStyle} disabled={isEmpty} textColor={black}>Edit Deck</Button>
           <Button onPress={()=> navigation.navigate('AddCard',{deckTitle})} style={styles.btnStyle} textColor={black}>Add Card</Button>
           <Button onPress={()=> navigation.navigate('Quiz',{deck})} disabled={isEmpty}>Start Quiz</Button>
         </View>

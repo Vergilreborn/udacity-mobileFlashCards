@@ -11,6 +11,7 @@ import Card from './components/Card'
 import Decks from './components/Decks'
 import NewDeck from './components/NewDeck'
 import Quiz from './components/Quiz'
+import EditDeck from './components/EditDeck'
 import DeckSelect from './components/DeckSelect'
 import { black, white } from './utils/colors'
 import { setLocalNotification} from './utils/notification'
@@ -92,6 +93,15 @@ const Main = StackNavigator({
     navigationOptions:{
       title: 'Quiz',
       headerTintColor: white,
+      headerStyle:{
+        backgroundColor:black
+      }
+    }
+  },
+  EditDeck:{
+    screen : EditDeck,
+    navigationOptions:{
+      headerTintColor:white,
       headerStyle:{
         backgroundColor:black
       }

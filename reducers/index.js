@@ -1,17 +1,17 @@
-import { ADD_DECK, SET_DECKS, ADD_CARD } from '../actions';
-// export const GET_DECKS = 'GET_DECK'
-// export const GET_DECK = 'GET_DECK'
-// export const ADD_DECK = 'ADD_DECK'
-// export const UPDATE_DECK = 'UPDATE_DECK'
-// export const DELETE_DECK = 'DELETE_DECK'
-// export const ADD_CARD = 'ADD_CARD'
-// export const UPDATE_CARD = 'UPDATE_CARD'
-// export const DELETE_CARD = 'DELETE_CARD'
+import { ADD_DECK, SET_DECKS, ADD_CARD, DELETE_DECK,DELETE_CARD } from '../actions';
 
 function decks(state = {}, action){
-  const { decks, deck, deckTitle, card } = action;
+  const { decks, deck, deckTitle, card,title,index } = action;
 
   switch(action.type){
+    case DELETE_CARD:
+      let deletedCardDeck = {...state};
+      deletedCardDeck[title].questions.splice(index,1)
+    return deletedCardDeck
+    case DELETE_DECK:
+      let newDeck = {...state};
+      delete newDeck[title]
+      return newDeck;
     case ADD_DECK:
       return { ...state,
                 [deck.title]:deck};
